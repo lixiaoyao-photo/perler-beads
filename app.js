@@ -1,7 +1,7 @@
 const state = {
   image: null,
   objectUrl: null,
-  mode: "preview",
+  mode: "pattern",
   showGrid: true,
   cropSquare: true,
   gridSize: 64,
@@ -12,6 +12,8 @@ const state = {
 };
 
 const paletteSymbols = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const XHS_NAME = "离小遥";
+const XHS_HANDLE = "fDuyaoyao";
 
 const refs = {
   imageInput: document.querySelector("#imageInput"),
@@ -32,6 +34,11 @@ const refs = {
   paletteList: document.querySelector("#paletteList"),
   downloadBtn: document.querySelector("#downloadBtn"),
   resetBtn: document.querySelector("#resetBtn"),
+  followModal: document.querySelector("#followModal"),
+  modalCopy: document.querySelector("#modalCopy"),
+  closeModalBtn: document.querySelector("#closeModalBtn"),
+  dismissModalBtn: document.querySelector("#dismissModalBtn"),
+  copyHandleBtn: document.querySelector("#copyHandleBtn"),
 };
 
 const ctx = refs.previewCanvas.getContext("2d");
@@ -429,6 +436,15 @@ function setControlState(enabled) {
   refs.resetBtn.disabled = !enabled;
 }
 
+function openFollowModal() {
+  refs.modalCopy.textContent = `欢迎来小红书找我玩：${XHS_NAME}（小红书号：${XHS_HANDLE}）。如果你做出了好看的图，也欢迎带图来找我。`;
+  refs.followModal.hidden = false;
+}
+
+function closeFollowModal() {
+  refs.followModal.hidden = true;
+}
+
 async function loadImage(file) {
   if (state.objectUrl) {
     URL.revokeObjectURL(state.objectUrl);
@@ -452,7 +468,7 @@ async function loadImage(file) {
 }
 
 function resetControls() {
-  state.mode = "preview";
+  state.mode = "pattern";
   state.showGrid = true;
   state.cropSquare = true;
   state.gridSize = 64;
@@ -538,9 +554,31 @@ refs.downloadBtn.addEventListener("click", () => {
   link.href = exportCanvas.toDataURL("image/png");
   link.download = `pin-beads-${state.mode}-${state.exportScale}x.png`;
   link.click();
+  openFollowModal();
 });
 
 refs.resetBtn.addEventListener("click", resetControls);
+refs.closeModalBtn.addEventListener("click", closeFollowModal);
+refs.dismissModalBtn.addEventListener("click", closeFollowModal);
+refs.followModal.addEventListener("click", (event) => {
+  if (event.target === refs.followModal) {
+    closeFollowModal();
+  }
+});
+refs.copyHandleBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(XHS_HANDLE);
+    refs.copyHandleBtn.textContent = "已复制";
+    window.setTimeout(() => {
+      refs.copyHandleBtn.textContent = "复制账号";
+    }, 1600);
+  } catch (error) {
+    refs.copyHandleBtn.textContent = "复制失败";
+    window.setTimeout(() => {
+      refs.copyHandleBtn.textContent = "复制账号";
+    }, 1600);
+  }
+});
 
 updateLabels();
 setupCanvasResolution();

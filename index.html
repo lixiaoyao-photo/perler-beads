@@ -16,10 +16,6 @@
             纯前端处理，不上传服务器。上传图片后即可生成拼豆风预览、网格图和颜色统计。
           </p>
         </div>
-        <div class="hero-badge">
-          <span>vibe coding</span>
-          <strong>pin beads</strong>
-        </div>
       </header>
 
       <main class="layout">
@@ -62,9 +58,9 @@
           <div class="control-group">
             <label for="modeSelect">输出模式</label>
             <select id="modeSelect">
-              <option value="preview">拼豆预览图</option>
               <option value="pattern">图纸模式</option>
               <option value="numbered">编号图纸</option>
+              <option value="preview">拼豆预览图</option>
             </select>
           </div>
 
@@ -130,6 +126,24 @@
           </div>
         </section>
       </main>
+    </div>
+
+    <div id="followModal" class="modal" hidden>
+      <div class="modal-card">
+        <button id="closeModalBtn" class="modal-close" type="button" aria-label="关闭">×</button>
+        <p class="modal-eyebrow">下载完成</p>
+        <h2>如果你用它做了好玩的图</h2>
+        <p id="modalCopy" class="modal-copy"></p>
+        <img
+          class="modal-card-image"
+          src="./assets/xhs-card.jpg"
+          alt="离小遥的小红书账号卡片"
+        />
+        <div class="modal-actions">
+          <button id="copyHandleBtn" class="button primary" type="button">复制账号</button>
+          <button id="dismissModalBtn" class="button secondary" type="button">我知道了</button>
+        </div>
+      </div>
     </div>
 
     <script src="./app.js"></script>
