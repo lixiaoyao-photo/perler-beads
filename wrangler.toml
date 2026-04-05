@@ -1,0 +1,5 @@
+name = "pin-beads-tool"
+compatibility_date = "2026-04-05"
+
+[pages]
+pages_build_output_dir = "."

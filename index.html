@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>照片转拼豆图</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">FREE FRONTEND TOOL</p>
+          <h1>把照片变成拼豆风图纸</h1>
+          <p class="hero-text">
+            纯前端处理，不上传服务器。上传图片后即可生成拼豆风预览、网格图和颜色统计。
+          </p>
+        </div>
+        <div class="hero-badge">
+          <span>vibe coding</span>
+          <strong>pin beads</strong>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel control-panel">
+          <div class="panel-header">
+            <h2>上传与参数</h2>
+            <p>先选一张图片，再调到你想要的颗粒感。</p>
+          </div>
+
+          <label class="upload-box" for="imageInput">
+            <input id="imageInput" type="file" accept="image/*" />
+            <span class="upload-title">上传照片</span>
+            <span class="upload-subtitle">支持 JPG、PNG、WebP</span>
+          </label>
+
+          <div class="control-group">
+            <label for="gridSize">
+              细节密度
+              <strong id="gridSizeValue">64</strong>
+            </label>
+            <input id="gridSize" type="range" min="24" max="112" step="4" value="64" />
+          </div>
+
+          <div class="control-group">
+            <label for="colorCount">
+              颜色数量
+              <strong id="colorCountValue">16</strong>
+            </label>
+            <input id="colorCount" type="range" min="6" max="32" step="1" value="16" />
+          </div>
+
+          <div class="control-group">
+            <label for="beadSize">
+              豆豆圆点占比
+              <strong id="beadSizeValue">82%</strong>
+            </label>
+            <input id="beadSize" type="range" min="55" max="96" step="1" value="82" />
+          </div>
+
+          <div class="control-group">
+            <label for="modeSelect">输出模式</label>
+            <select id="modeSelect">
+              <option value="preview">拼豆预览图</option>
+              <option value="pattern">图纸模式</option>
+              <option value="numbered">编号图纸</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="exportScale">导出清晰度</label>
+            <select id="exportScale">
+              <option value="2">高清 PNG · 2x</option>
+              <option value="3">超清 PNG · 3x</option>
+              <option value="4">打印级 PNG · 4x</option>
+            </select>
+          </div>
+
+          <div class="toggle-row">
+            <label class="toggle">
+              <input id="cropSquare" type="checkbox" checked />
+              <span>裁成正方形</span>
+            </label>
+            <label class="toggle">
+              <input id="showGrid" type="checkbox" checked />
+              <span>显示网格</span>
+            </label>
+          </div>
+
+          <div class="button-row">
+            <button id="downloadBtn" class="button primary" disabled>导出 PNG</button>
+            <button id="resetBtn" class="button secondary" disabled>恢复默认</button>
+          </div>
+
+          <div class="hint-box">
+            <p>建议先用头像、宠物、插画类图片测试，效果通常比复杂风景更稳定。</p>
+          </div>
+        </section>
+
+        <section class="panel preview-panel">
+          <div class="panel-header">
+            <h2>实时预览</h2>
+            <p id="imageMeta">还没有图片，先上传一张试试。</p>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="previewCanvas" width="960" height="960"></canvas>
+          </div>
+        </section>
+
+        <section class="panel stats-panel">
+          <div class="panel-header">
+            <h2>颜色统计</h2>
+            <p>每种颜色对应的颗粒数量会显示在这里。</p>
+          </div>
+
+          <div class="stats-summary">
+            <div>
+              <span class="summary-label">豆豆总数</span>
+              <strong id="beadCount">0</strong>
+            </div>
+            <div>
+              <span class="summary-label">使用颜色</span>
+              <strong id="paletteCount">0</strong>
+            </div>
+          </div>
+
+          <div id="paletteList" class="palette-list">
+            <p class="empty-state">上传图片后生成颜色清单。</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

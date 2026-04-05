@@ -1,0 +1,10 @@
+{
+  "name": "pin-beads-tool",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A static front-end tool that turns photos into pin beads style patterns.",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "deploy": "wrangler pages deploy . --project-name pin-beads-tool"
+  }
+}
