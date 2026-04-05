@@ -437,7 +437,7 @@ function setControlState(enabled) {
 }
 
 function openFollowModal() {
-  refs.modalCopy.textContent = `欢迎来小红书找我玩：${XHS_NAME}（小红书号：${XHS_HANDLE}）。如果你做出了好看的图，也欢迎带图来找我。`;
+  refs.modalCopy.textContent = `我是上海女摄${XHS_NAME}，小红书号 ${XHS_HANDLE}。如果你做出了好看的图，欢迎带图来找我。`;
   refs.followModal.hidden = false;
 }
 
